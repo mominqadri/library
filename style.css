@@ -1,0 +1,12 @@
+.center {
+    text-align: center;
+}
+
+.hideForm{
+    display: none;
+}
+
+.showForm{
+    display: inline;
+}
+
