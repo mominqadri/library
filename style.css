@@ -8,8 +8,13 @@
     display: none;
 }
 
+
 .showForm{
     display: inline;
+}
+
+.deleteButton {
+    display: none;
 }
 
 #addBook {

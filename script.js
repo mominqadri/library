@@ -9,11 +9,21 @@ let myLibrary = []; // where all the books will be stored
 let showForm = document.querySelector(".showForm")
 let addBookForm = document.querySelector("#addBook")
 let addBookButton = document.querySelector("#addBookButton")
+let removeButton = document.querySelector('#removeBooks')
 let displayBooks = document.querySelector("#displayBooks")
 
 
 showForm.addEventListener("click", toggleForm);
 addBookButton.addEventListener("click", addBookToLibrary);
+removeButton.addEventListener("click", toggleDelete)
+
+
+function toggleDelete(){
+    document.querySelectorAll(".deleteButton").forEach((element) => {
+        element.classList.toggle("deleteButton")
+    })
+}
+
 
 function toggleForm(){
     addBookForm.classList.toggle("hideForm")
@@ -38,6 +48,11 @@ function addBookToDisplay(author, title, pages, read) {
     theAuthor.classList.add('author')
     theAuthor.textContent = author
     bottom.appendChild(theAuthor)
+
+    const numPages = document.createElement('span')
+    numPages.classList.add('author')
+    numPages.textContent = `:${pages} pages`
+    bottom.appendChild(numPages)
 
     newCard.appendChild(top)
     newCard.appendChild(bottom)
@@ -81,7 +96,9 @@ function render() {
                                     '<span class="title">' + myLibrary[elem].title + '</span>'+                        
                                 '</div>'+
                                 '<div class = "bottomBook">'+
-                                    '<span class="author">' + myLibrary[elem].author + '</span>'+
+                                    '<span class="author">' + myLibrary[elem].author + ": " + '</span>'+
+                                    '<span class="author">' + myLibrary[elem].numPages + " pages" + '</span>'+
+                                    '<button class = "deleteButton">' + "Delete" + '</button>'+
                                 '</div>'+
                             '</div>';
 		index++;
@@ -90,6 +107,8 @@ function render() {
     // loops through array and displays each book on the page (w a table or something)
 
 }
+
+
 
 function isBlank(str) {
     // return (!str || /^\s*$/.test(str));
