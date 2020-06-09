@@ -1,6 +1,8 @@
 .center {
-    text-align: center;
-}
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
 
 .hideForm{
     display: none;
@@ -8,5 +10,39 @@
 
 .showForm{
     display: inline;
+}
+
+#addBook {
+    width: 100px;
+    border: 15px black;
+    margin: 20px;
+}
+
+#displayBooks {
+    width: 200px;
+    border: 15px solid blue;
+    margin: 20px;
+}
+
+.bookCard {
+    border: 20px lightgreen;
+    margin: auto;
+    width: 70%;
+    padding: 10px;
+}
+
+
+.author {
+    font-size: .7em;
+    font-style: inherit;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+
+.title {
+    font-size: .8em;
+    font-weight: bold;
+    margin: auto;
 }
 

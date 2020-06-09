@@ -9,6 +9,8 @@ let myLibrary = []; // where all the books will be stored
 let showForm = document.querySelector(".showForm")
 let addBookForm = document.querySelector("#addBook")
 let addBookButton = document.querySelector("#addBookButton")
+let displayBooks = document.querySelector("#displayBooks")
+
 
 showForm.addEventListener("click", toggleForm);
 addBookButton.addEventListener("click", addBookToLibrary);
@@ -17,6 +19,31 @@ function toggleForm(){
     addBookForm.classList.toggle("hideForm")
 }
 
+function addBookToDisplay(author, title, pages, read) {
+    const newCard = document.createElement('div')
+    newCard.classList.add('bookCard')
+
+    const top = document.createElement('div')
+    top.classList.add('topBook')
+
+    const theTitle = document.createElement('span')
+    theTitle.classList.add('title')
+    theTitle.textContent = title
+    top.appendChild(theTitle)
+
+    const bottom = document.createElement('div')
+    bottom.classList.add('bottomBook')
+
+    const theAuthor = document.createElement('span')
+    theAuthor.classList.add('author')
+    theAuthor.textContent = author
+    bottom.appendChild(theAuthor)
+
+    newCard.appendChild(top)
+    newCard.appendChild(bottom)
+
+    displayBooks.appendChild(newCard)
+}
 
 function addBookToLibrary() {
     let author = document.querySelector("#bookAuthor").value
@@ -32,20 +59,37 @@ function addBookToLibrary() {
             read = "no"
         }
         myLibrary.push(new Book(author, title, pages, read))
+        addBookToDisplay(author, title, pages, read)
         clearInputs()
         toggleForm()
+        console.log(myLibrary)
+        
     }
     else {
         alert("input invalid!")
     }
 }  
 
+
 function render() {
+    displayBooks.innerHTML = "";
+    index = 0
+
+	for (elem in myLibrary) {
+		displayBooks.innerHTML += '<div class = "bookCard">'+
+                                '<div class = "topBook">'+
+                                    '<span class="title">' + myLibrary[elem].title + '</span>'+                        
+                                '</div>'+
+                                '<div class = "bottomBook">'+
+                                    '<span class="author">' + myLibrary[elem].author + '</span>'+
+                                '</div>'+
+                            '</div>';
+		index++;
+	}
     // array linked to HTML here
     // loops through array and displays each book on the page (w a table or something)
 
 }
-
 
 function isBlank(str) {
     // return (!str || /^\s*$/.test(str));
@@ -59,3 +103,14 @@ function clearInputs(){
     }
     document.querySelector("#bookStatus").checked = false;
 }
+
+
+
+function main() {
+    myLibrary.push(new Book("Arthur Conan Doyle", "Sherlock Holmes", 400, true))
+    myLibrary.push(new Book("JK Rowling", "Harry Potter", 870, true))
+    render();
+}
+
+
+main()
