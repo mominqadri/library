@@ -11,6 +11,7 @@ let addBookForm = document.querySelector("#addBook")
 let addBookButton = document.querySelector("#addBookButton")
 let removeButton = document.querySelector('#removeBooks')
 let displayBooks = document.querySelector("#displayBooks")
+let index = 0
 
 
 showForm.addEventListener("click", toggleForm);
@@ -29,8 +30,9 @@ function toggleForm(){
     addBookForm.classList.toggle("hideForm")
 }
 
+/*
 function addBookToDisplay(author, title, pages, read) {
-    const newCard = document.createElement('div')
+     const newCard = document.createElement('div')
     newCard.classList.add('bookCard')
 
     const top = document.createElement('div')
@@ -57,8 +59,10 @@ function addBookToDisplay(author, title, pages, read) {
     newCard.appendChild(top)
     newCard.appendChild(bottom)
 
-    displayBooks.appendChild(newCard)
+    displayBooks.appendChild(newCard) 
+
 }
+ */
 
 function addBookToLibrary() {
     let author = document.querySelector("#bookAuthor").value
@@ -74,11 +78,10 @@ function addBookToLibrary() {
             read = "no"
         }
         myLibrary.push(new Book(author, title, pages, read))
-        addBookToDisplay(author, title, pages, read)
+        // addBookToDisplay(author, title, pages, read)
+        render()
         clearInputs()
         toggleForm()
-        console.log(myLibrary)
-        
     }
     else {
         alert("input invalid!")
@@ -97,8 +100,8 @@ function render() {
                                 '</div>'+
                                 '<div class = "bottomBook">'+
                                     '<span class="author">' + myLibrary[elem].author + ": " + '</span>'+
-                                    '<span class="author">' + myLibrary[elem].numPages + " pages" + '</span>'+
-                                    '<button class = "deleteButton">' + "Delete" + '</button>'+
+                                    '<span class="author">' + myLibrary[elem].numPages + " pages " + '</span>'+
+                                    '<button class = "deleteButton" onclick = "deleteBook('+ index +')">' + "Delete" + '</button>'+
                                 '</div>'+
                             '</div>';
 		index++;
@@ -108,6 +111,11 @@ function render() {
 
 }
 
+
+function deleteBook(index) {
+    myLibrary.splice(index, 1)
+    render()
+}
 
 
 function isBlank(str) {
